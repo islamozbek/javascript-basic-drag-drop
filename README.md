@@ -1,2 +1,1 @@
-# javascript-basit-drag-drop
-Drag drop with Javascript
+# Drag drop with Javascript
