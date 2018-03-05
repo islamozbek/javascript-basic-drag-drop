@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+
+    <!--[if IE]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <style>
+    li
+    { 
+      list-style: none;
+      float: left;
+      border: 1px solid #ccc;
+      padding: 10px;
+      background: #f1f1f1;
+      cursor: pointer;
+      margin-right: 10px;
+      position: relative;
+      left: 0;
+      top: 0;
+    }
+    </style>
+    <script>
+
+    function drag_start(event) 
+    {
+        var style = window.getComputedStyle(event.target, null);
+        var str = (parseInt(style.getPropertyValue("left")) - event.clientX) + ',' + (parseInt(style.getPropertyValue("top")) - event.clientY)+ ',' + event.target.id;
+      
+        event.dataTransfer.setData("Text",str);
+    } 
+
+    function drop(event) 
+    {
+        var offset = event.dataTransfer.getData("Text").split(',');
+        var dm = document.getElementById(offset[2]);
+        dm.style.left = (event.clientX + parseInt(offset[0],10)) + 'px';
+        dm.style.top = (event.clientY + parseInt(offset[1],10)) + 'px';
+
+        event.preventDefault();
+        return false;
+    }
+
+    function drag_over(event)
+    {
+        event.preventDefault();
+        return false;
+    }   
+
+
+    </script>
+  </head>
+  <body ondragover="drag_over(event)" ondrop="drop(event)" style="width:100%; height: 700px">
+    
+    <ul>
+      <li id="menu1" draggable="true" ondragstart="drag_start(event)">Menu 1</li>
+      <li id="menu2" draggable="true" ondragstart="drag_start(event)">Menu 2</li>
+      <li id="menu3" draggable="true" ondragstart="drag_start(event)">Menu 3</li>
+      <li id="menu4" draggable="true" ondragstart="drag_start(event)">Menu 4</li>
+      <li id="menu5" draggable="true" ondragstart="drag_start(event)">Menu 5</li>
+    </ul>
+
+  </body>
+  </html>
